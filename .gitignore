@@ -1,0 +1,4 @@
+config.py
+dumps
+*pyc
+uploads-sync.prf
