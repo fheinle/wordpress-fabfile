@@ -78,7 +78,7 @@ def push_local_database():
     remote_database_filename = put(local_database_filename, '/tmp/', mode=0400)
     run(_make_db_import_string('remote', remote_database_filename[0]))
     with settings(warn_only=True):
-        if run("test -d %s" % os.path.join(
+        if run("test -f %s" % os.path.join(
             CODE_DIR_REMOTE,
             'wp_migrate_to_remote.sql')
         ).failed:
@@ -109,7 +109,7 @@ def sync_uploads():
     """two-way sync wp-content/sync_uploads
     requires unison and configuration! See README"""
     with settings(warn_only=True):
-        if local('test -d %s' % os.path.join(
+        if local('test -L %s' % os.path.join(
             os.getenv('HOME'),
             '.unison',
             'uploads-sync.prf'
